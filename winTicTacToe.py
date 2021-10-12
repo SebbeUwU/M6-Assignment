@@ -1,4 +1,4 @@
-def win(board, choice, player): 
+def win(board, choice, player):  #choice är det senaste lagda draget, player är symbolden på brädet som används
     direction = [] #Koden är olik för alla riktningar, vet inte om det går att göra bättre
     i = 0          #Men känns som att det KANSKE går att få in det i 2 while loopar om man e smart
     while choice[1]+i < len(board): #En test att "i" tillsammans med choice är inom brädspelet
