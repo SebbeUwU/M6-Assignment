@@ -66,6 +66,6 @@ def win(board, choice, player):
             i = i + 1
         else:
             break
-    if sum(direction) >= 3: # 3 ger tictactoe, öka för större plan.
+    if sum(direction) >= 3: # 3 ger tictactoe, öka för större plan. 
         return True
     return False
