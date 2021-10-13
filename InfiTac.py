@@ -117,13 +117,12 @@ def boardState(board: list, newInput: list , playerTile: str): # NOT DONE
 
 
 
-def winCon(board: list, newInput: list, playerTile: str):
+def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
     pattern = re.compile(f"{playerTile*winLength(board)}")
     boardRow = "".join([_ for _ in board[newInput[1]]])
     boardColumn = "".join(board[:][newInput[0]])
     if pattern.search(boardRow) or pattern.search(boardColumn):
-        #Win
-        pass
+        return True
 
     direction = [] #diagonal1, går upp mot höger
     i = 0
@@ -160,10 +159,16 @@ def winCon(board: list, newInput: list, playerTile: str):
     if sum(direction) >= 3: # 3 ger tictactoe, öka för större plan. 
         return True
 
+    tie = ""
+    for i in range(0,len(board)):
+        if emptyBoardTile() in board[i]:
+            tie = None
+    if tie == None:
+        viewboard(board)
+        print("It's a tie!")
+        return None
 
-    # [c1-n+1, c2-n+1] -> [c1+n-1, c2+n-1]
-
-pass
+    return False
 
 emptyBoardTile()
 board = createBoard(4)
