@@ -1,4 +1,4 @@
-from re import *
+import re
 
 
 
@@ -118,16 +118,51 @@ def boardState(board: list, newInput: list , playerTile: str): # NOT DONE
 
 
 def winCon(board: list, newInput: list, playerTile: str):
-    pattern = compile(f"{playerTile*winLength(board)}")
+    pattern = re.compile(f"{playerTile*winLength(board)}")
     boardRow = "".join([_ for _ in board[newInput[1]]])
     boardColumn = "".join(board[:][newInput[0]])
     if pattern.search(boardRow) or pattern.search(boardColumn):
         #Win
         pass
 
+    direction = [] #diagonal1, går upp mot höger
+    i = 0
+    while choice[1]+i < len(board) and choice[0]+i < len(board): 
+        if board[choice[0]+i][choice[1]+i] == player:
+            direction.append(1)
+            i = i + 1
+        else:
+            break
+    i = 1
+    while choice[1]-i >= 0 and choice[0]-i >= 0: 
+        if board[choice[0]-i][choice[1]-i] == player:
+            direction.append(1)
+            i = i + 1
+        else:
+            break
+    if sum(direction) >= 3: # 3 ger tictactoe, öka för större plan.
+        return True
+    direction = [] #diagonal1, går ner mot höger
+    i = 0
+    while choice[1]-i >= 0 and choice[0] +i< len(board): 
+        if board[choice[0]+i][choice[1]-i] == player:
+            direction.append(1)
+            i = i + 1
+        else:
+            break
+    i = 1
+    while choice[0]-i >= 0 and choice[1] +i < len(board): 
+        if board[choice[0]-i][choice[1]+i] == player:
+            direction.append(1)
+            i = i + 1
+        else:
+            break
+    if sum(direction) >= 3: # 3 ger tictactoe, öka för större plan. 
+        return True
 
 
-    
+    # [c1-n+1, c2-n+1] -> [c1+n-1, c2+n-1]
+
 pass
 
 emptyBoardTile()
