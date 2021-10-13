@@ -8,7 +8,7 @@
 
 
 def createBoard(size: int): # KLAART
-    board = [["_"]*size]*size
+    board = [[emptyBoardTile()]*size]*size
     return board
 
 def viewBoard(board: list): # KLAART
@@ -63,10 +63,21 @@ def player2Tile(tile = None):   # KLAART
         player2Tile.savedTile = "o"
     return player2Tile.savedTile
 
-def rowCount(num = None):   # KLAART
+def rowCount(board, num = None):   # KLAART
     if num != None:
         rowCount.savedNum = num
+        if rowCount.savedNum > len(board): 
+            rowCount.savedNum = len(board)
     elif not hasattr(rowCount, "savedNum"):
         rowCount.savedNum = 3
+        if rowCount.savedNum > len(board): 
+            rowCount.savedNum = len(board)
     return rowCount.savedNum
+
+def emptyBoardTile(tile = None):
+    if tile != None:
+        emptyBoardTile.savedTile = tile
+    elif not hasattr(emptyBoardTile, "savedTile"):
+        emptyBoardTile.savedTile = "_"
+    return emptyBoardTile.savedTile
 #endregion
