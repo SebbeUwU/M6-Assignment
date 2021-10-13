@@ -120,7 +120,7 @@ def boardState(board: list, newInput: list , playerTile: str): # NOT DONE
 def winCon(board: list, newInput: list, playerTile: str):
     pattern = compile(f"{playerTile*winLength(board)}")
     boardRow = "".join([_ for _ in board[newInput[1]]])
-    boardColumn = board[:][newInput[0]]
+    boardColumn = "".join(board[:][newInput[0]])
     if pattern.search(boardRow) or pattern.search(boardColumn):
         #Win
         pass
