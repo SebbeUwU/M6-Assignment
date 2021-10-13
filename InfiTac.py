@@ -1,7 +1,5 @@
 import re
 
-
-
 # Säg till om du har något du tycker borde ändras
 
 
@@ -98,24 +96,18 @@ def menu(title: str, prompt: str, options: dict): # KLAART
 
     return userSelection
 
-
-def boardState(board: list, newInput: list , playerTile: str): # NOT DONE
-
-    # newInput är på formen [x,y] för enkelhetens skull
-
-
-    #typ sätt in ny tile som spelaren sa och sen kolla i alla riktningar för möjliga matchningar med regex eller nåt och rowCount()
-
+def boardState(board: list, newInput: list , playerTile: str): # Klar
     board[newInput[0]][newInput[1]] = playerTile
+    viewBoard(board)
+    gameOver = winCon(board, newInput, playerTile)
 
-    pass
-
-
-
-
-
-
-
+    if gameOver == True:
+        print(f"Player {playerTile} won!")
+    elif gameOver == None:
+        print("It's a tie!")
+        gameOver = True
+    
+    return not gameOver
 
 def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
     pattern = re.compile(f"{playerTile*winLength(board)}")
@@ -164,13 +156,8 @@ def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
         if emptyBoardTile() in board[i]:
             tie = None
     if tie == None:
-        viewboard(board)
-        print("It's a tie!")
         return None
 
     return False
 
-emptyBoardTile()
-board = createBoard(4)
-
-winCon(board, [1,2], "_")
+main()
