@@ -21,11 +21,8 @@ from re import *
 def player1Tile(tile = None):   # KLAART
 
     if tile != None:
-
         player1Tile.savedTile = tile
-
     elif not hasattr(player1Tile, "savedTile"):
-
         player1Tile.savedTile = "x"
 
     return player1Tile.savedTile
@@ -34,11 +31,8 @@ def player1Tile(tile = None):   # KLAART
 def player2Tile(tile = None):   # KLAART
 
     if tile != None: 
-
         player2Tile.savedTile = tile
-
     elif not hasattr(player2Tile, "savedTile"):
-
         player2Tile.savedTile = "o"
 
     return player2Tile.savedTile
@@ -76,11 +70,8 @@ def createBoard(size: int, tile = emptyBoardTile()): # KLAART
 def viewBoard(board: list): # KLAART
 
     for i in range(len(board)):
-
         boardRow = ""
-
         for j in range(len(board[i])):
-
             boardRow += board[i][j]
 
         print(boardRow)
@@ -92,9 +83,7 @@ def viewBoard(board: list): # KLAART
 def menu(title: str, prompt: str, options: dict): # KLAART 
     print(title)
 
-
     for k, v in options.items():
-
         print(f"{k}) {v}")
 
     print()
@@ -102,11 +91,8 @@ def menu(title: str, prompt: str, options: dict): # KLAART
     userSelection = None
 
     while True:
-
         userSelection = input(prompt)
-
         if userSelection in options:
-
             break
     print()
 
@@ -131,17 +117,15 @@ def boardState(board: list, newInput: list , playerTile: str): # NOT DONE
 
 
 
-
-
 def winCon(board: list, newInput: list, playerTile: str):
     pattern = compile(f"{playerTile*winLength(board)}")
-
     boardRow = "".join([_ for _ in board[newInput[1]]])
     boardColumn = board[:][newInput[0]]
-    
     if pattern.search(boardRow) or pattern.search(boardColumn):
         #Win
         pass
+
+
 
     
 pass
