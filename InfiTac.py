@@ -189,4 +189,5 @@ def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
 
     return False
 
-main()
+
+
