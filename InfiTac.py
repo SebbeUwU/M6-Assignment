@@ -147,15 +147,15 @@ def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
 
     direction = [] #diagonal1, går upp mot höger
     i = 0
-    while choice[1]+i < len(board) and choice[0]+i < len(board): 
-        if board[choice[0]+i][choice[1]+i] == player:
+    while newInput[1]+i < len(board) and newInput[0]+i < len(board): 
+        if board[newInput[0]+i][newInput[1]+i] == playerTile:
             direction.append(1)
             i = i + 1
         else:
             break
     i = 1
-    while choice[1]-i >= 0 and choice[0]-i >= 0: 
-        if board[choice[0]-i][choice[1]-i] == player:
+    while newInput[1]-i >= 0 and newInput[0]-i >= 0: 
+        if board[newInput[0]-i][newInput[1]-i] == playerTile:
             direction.append(1)
             i = i + 1
         else:
@@ -164,15 +164,15 @@ def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
         return True
     direction = [] #diagonal1, går ner mot höger
     i = 0
-    while choice[1]-i >= 0 and choice[0] +i< len(board): 
-        if board[choice[0]+i][choice[1]-i] == player:
+    while newInput[1]-i >= 0 and newInput[0] +i< len(board): 
+        if board[newInput[0]+i][newInput[1]-i] == playerTile:
             direction.append(1)
             i = i + 1
         else:
             break
     i = 1
-    while choice[0]-i >= 0 and choice[1] +i < len(board): 
-        if board[choice[0]-i][choice[1]+i] == player:
+    while newInput[0]-i >= 0 and newInput[1] +i < len(board): 
+        if board[newInput[0]-i][newInput[1]+i] == playerTile:
             direction.append(1)
             i = i + 1
         else:
