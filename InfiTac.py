@@ -1,7 +1,4 @@
 import re
-
-#test
-
 # Säg till om du har något du tycker borde ändras
 
 
@@ -61,9 +58,40 @@ def emptyBoardTile(tile = None):
 
 #endregion
 
-def createBoard(size: int, tile = emptyBoardTile()): # KLAART
+def saveBoard(board: list, currentPlayer, saveName: str):
+    open(saveName+".txt", "w").close()
+    save = open(saveName+".txt", "w")
+    save.write(f"BoardSize: {len(board)}")
+    for i in range(len(board)):
+        boardRow = "".join([_ for _ in board[i]])
+        save.write(boardRow)
+    
+    save.write(f"CurrentPlayer: {currentPlayer}")
+    save.write(f"Player1: {player1Tile()}")
+    save.write(f"Player2: {player2Tile()}")
+    save.write(f"EmptyTile: {emptyBoardTile()}")
+    save.close()
+    pass
 
-    board = [[tile]*size]*size
+def loadBoard(saveName: str):
+    save = open(saveName+".txt", "r")
+    line = save.readline()
+    boardSize = int(line.split("BoardSize: ")[1])
+
+    board = []
+    for i in range(boardSize):
+        board[i] = save.readline().split()
+
+    currentPlayer = line.split("CurrentPlayer: ")[1]
+    player1Tile(line.split("Player1: ")[1])
+    player2Tile(line.split("Player2: ")[1])
+    emptyBoardTile(line.split("EmptyTile: ")[1])
+    return board, currentPlayer
+    
+
+def createBoard(size: int): # KLAART
+
+    board = [[emptyBoardTile()]*size]*size
     return board
 
 
