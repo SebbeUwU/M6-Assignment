@@ -66,9 +66,9 @@ def saveBoard(board: list, currentPlayer, saveName: str):
         boardRow = "".join([_ for _ in board[i]])
         save.write(boardRow)
     
+
     save.write(f"CurrentPlayer: {currentPlayer}")
-    save.write(f"Player1: {player1Tile()}")
-    save.write(f"Player2: {player2Tile()}")
+    save.write(f"Player2: {player2Tile() if currentPlayer == player1Tile() else player1Tile()}")
     save.write(f"EmptyTile: {emptyBoardTile()}")
     save.close()
     pass
@@ -82,11 +82,10 @@ def loadBoard(saveName: str):
     for i in range(boardSize):
         board[i] = save.readline().split()
 
-    currentPlayer = line.split("CurrentPlayer: ")[1]
-    player1Tile(line.split("Player1: ")[1])
+    player1Tile(line.split("CurrentPlayer: ")[1])
     player2Tile(line.split("Player2: ")[1])
     emptyBoardTile(line.split("EmptyTile: ")[1])
-    return board, currentPlayer
+    return board
     
 
 def createBoard(size: int): # KLAART
