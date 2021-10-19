@@ -206,16 +206,30 @@ def play(board = createBoard(3)):
     while gameOver:
         while True:
             userInput = input("x, y: ")
-            try: 
+            try:
+                emptyTile = True
                 userInput = userInput.split(", ")
                 userInputList = [int(userInput[0]), int(userInput[1])]
+                if board[userInputList[0]][userInputList[1]] != "_":
+                    raise TypeError
+
                 print(userInputList)
+                boardTest = board[userInputList[0]][userInputList[1]]
                 break
+                
             except ValueError:
                 #redo
                 print("Incorrect format, it needs to be as 'x, y'")
                 continue
+            except TypeError:
+                print("Tile is occupied")
+                continue
+            except IndexError:
+                print("Out of range")
+                continue
+                
         gameOver = boardState(board, userInputList, currentPlayer)
+        
         if currentPlayer == player1Tile():
             currentPlayer = player2Tile()
         else:
@@ -227,6 +241,9 @@ def main():
     while True:
         option = menu("Welcome to InfiniTac, what would you like to do", "Option: ", menuItems)
         if option == "p":
+            player1Tile("x")
+            player2Tile("o")
+            winLength(3)
             play()
         elif option == "c":
             player1Tile(int(input("Choose a tile for player 1: ")))
