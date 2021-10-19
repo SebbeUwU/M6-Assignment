@@ -134,9 +134,7 @@ def menu(title: str, prompt: str, options: dict): # KLAART
 def boardState(board: list, newInput: list , playerTile: str): # Klar
     x = newInput[0]
     y = newInput[1]
-    print(board)
     board[y][x] = playerTile
-    print(board)
     viewBoard(board)
     gameOver = winCon(board, newInput, playerTile)
 
@@ -243,8 +241,9 @@ def main():
         if option == "p":
             player1Tile("x")
             player2Tile("o")
-            winLength(3)
-            play()
+            board = createBoard(3)
+            winLength(board, 3)
+            play(board)
         elif option == "c":
             player1Tile(int(input("Choose a tile for player 1: ")))
             player2Tile(int(input("Choose a tile for player 2: ")))
