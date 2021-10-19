@@ -88,9 +88,15 @@ def loadBoard(saveName: str):
     return board
     
 
-def createBoard(size: int): # KLAART
+def createBoard(size: int): # KLAAR
+    board = []
+    for i in range(size):
+        boardRow = [emptyBoardTile()]*size
+        board.append(boardRow)
 
-    board = [[emptyBoardTile()]*size]*size
+
+   # board = [[emptyBoardTile()]*size]*size
+    #board = [board[:] for i in range(size)]
     return board
 
 
@@ -126,7 +132,11 @@ def menu(title: str, prompt: str, options: dict): # KLAART
     return userSelection
 
 def boardState(board: list, newInput: list , playerTile: str): # Klar
-    board[newInput[0]][newInput[1]] = playerTile
+    x = newInput[0]
+    y = newInput[1]
+    print(board)
+    board[y][x] = playerTile
+    print(board)
     viewBoard(board)
     gameOver = winCon(board, newInput, playerTile)
 
@@ -142,6 +152,7 @@ def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
     pattern = re.compile(f"{playerTile*winLength(board)}")
     boardRow = "".join([_ for _ in board[newInput[1]]])
     boardColumn = "".join(board[:][newInput[0]])
+    
     if pattern.search(boardRow) or pattern.search(boardColumn):
         return True
 
@@ -183,11 +194,52 @@ def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
     tie = ""
     for i in range(0,len(board)):
         if emptyBoardTile() in board[i]:
-            tie = None
-    if tie == None:
-        return None
+            continue
+        else: return None
 
     return False
 
 
+def play(board = createBoard(3)):
+    currentPlayer = player1Tile()
+    gameOver = True
+    while gameOver:
+        while True:
+            userInput = input("x, y: ")
+            try: 
+                userInput = userInput.split(", ")
+                userInputList = [int(userInput[0]), int(userInput[1])]
+                print(userInputList)
+                break
+            except ValueError:
+                #redo
+                print("Incorrect format, it needs to be as 'x, y'")
+                continue
+        gameOver = boardState(board, userInputList, currentPlayer)
+        if currentPlayer == player1Tile():
+            currentPlayer = player2Tile()
+        else:
+            currentPlayer = player1Tile()
+    pass
+        
+def main():
+    menuItems = {"p":"Play TicTacToe", "c":"Custom Game", "l":"Load Game", "q":"Quit"}
+    while True:
+        option = menu("Welcome to InfiniTac, what would you like to do", "Option: ", menuItems)
+        if option == "p":
+            play()
+        elif option == "c":
+            player1Tile(int(input("Choose a tile for player 1: ")))
+            player2Tile(int(input("Choose a tile for player 2: ")))
+            board = createBoard(int(input("Choose a boardsize: ")))
+            winLength(int(input("Choose amount of tiles in a row to win: ")))
+            play(board)
+            
+        elif option == "l":
+            
+            play(board)
+        elif option == "q":
+            print("Thank you for playing")
+            break
 
+main()
