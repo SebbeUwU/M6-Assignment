@@ -208,7 +208,7 @@ def play(board = createBoard(3)):
                 emptyTile = True
                 userInput = userInput.split(", ")
                 userInputList = [int(userInput[0]), int(userInput[1])]
-                if board[userInputList[0]][userInputList[1]] != "_":
+                if board[userInputList[0]][userInputList[1]] != emptyBoardTile():
                     raise TypeError
 
                 print(userInputList)
