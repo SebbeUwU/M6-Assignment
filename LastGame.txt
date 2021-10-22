@@ -1,0 +1,7 @@
+BoardSize: 3
+o _ _
+_ x _
+_ _ _
+CurrentPlayer: x
+Player2: o
+EmptyTile: _
