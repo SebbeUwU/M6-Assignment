@@ -98,8 +98,7 @@ def createBoard(size: int): # KLAAR
         for j in range(size):
             columns.append(emptyBoardTile())
         board.append(columns)
-    
-    print(board)
+
    # board = [[emptyBoardTile()]*size]*size
     #board = [board[:] for i in range(size)]
     return board
