@@ -1,21 +1,7 @@
 import re
 import os
 
-# Säg till om du har något du tycker borde ändras
-
-
-# Måste göras, kan finnas mer:
-
-#   Turnstate
-
-#   Main
-
-#   User Input
-
-#   AI
-
-#region Statiska variabler
-# hasattr() kollar om funktionen är initierad eller inte när den används. Om inte så sätts värdet till ett standardvärde.
+#region
 
 def player1Tile(tile = None):   # KLAART
 
@@ -59,6 +45,9 @@ def emptyBoardTile(tile = None):
     return emptyBoardTile.savedTile
 
 #endregion
+
+
+
 
 def saveBoard(board: list, currentPlayer, saveName: str):
     open(saveName+".txt", "w").close()
