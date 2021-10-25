@@ -1,0 +1,9 @@
+BoardSize: 4
+x x _ _
+o x _ _
+o o x _
+o _ _ _
+CurrentPlayer: x
+Player2: o
+EmptyTile: _
+WinLength: 4

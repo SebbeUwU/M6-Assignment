@@ -60,6 +60,7 @@ def saveBoard(board: list, currentPlayer, saveName: str):
         save.write(f"CurrentPlayer: {currentPlayer}\n")
         save.write(f"Player2: {player2Tile() if currentPlayer == player1Tile() else player1Tile()}\n")
         save.write(f"EmptyTile: {emptyBoardTile()}\n")
+        save.write(f"WinLength: {winLength(board)}\n")
     pass
 
 def loadBoard(saveName: str):
@@ -76,6 +77,7 @@ def loadBoard(saveName: str):
         player1Tile(save.readline().split("CurrentPlayer: ")[1][0:-1])
         player2Tile(save.readline().split("Player2: ")[1][0:-1])
         emptyBoardTile(save.readline().split("EmptyTile: ")[1][0:-1])
+        winLength(board, save.readline().split("WinLength: ")[1][0:-1])
 
     return board
     
@@ -147,7 +149,7 @@ def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
             i = i + 1
         else:
             break
-    if sum(direction) >= 3: # 3 ger tictactoe, öka för större plan.
+    if sum(direction) >= winLength(board): # 3 ger tictactoe, öka för större plan.
         return True
     direction = [] #diagonal1, går ner mot höger
     i = 0
@@ -164,7 +166,7 @@ def winCon(board: list, newInput: list, playerTile: str): # KLAAR den gör nåt
             i = i + 1
         else:
             break
-    if sum(direction) >= 3: # 3 ger tictactoe, öka för större plan. 
+    if sum(direction) >= winLength(board): # 3 ger tictactoe, öka för större plan. 
         return True
 
     tie = ""
@@ -244,8 +246,8 @@ def main():
             winLength(board, 3)
             play(board)
         elif option == "c":
-            player1Tile(input("Choose a tile for player 1: "))
-            player2Tile(input("Choose a tile for player 2: "))
+            player1Tile(input("Choose a tile for player 1: ")[0])
+            player2Tile(input("Choose a tile for player 2: ")[0])
             board = createBoard(int(input("Choose a boardsize: ")))
             winLength(board, int(input("Choose amount of tiles in a row to win: ")))
             saveName = input("Choose name of save: ")
